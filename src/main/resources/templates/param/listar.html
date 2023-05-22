@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	
+		<head>	
+				<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+
+		</head>
+		
+		<header ></header>
+		
+	
+	<body>
+		
+			
+	<div class="container mt-5"> 
+		<div th:each="usuario : ${usuarios}">
+			
+			<div class="row justity-content-center">
+				
+				<div class="card m-1 p-1" style="width:30% ">
+					
+					<div class="row">
+						
+						<div class="col-md-7">
+							<img class="float-left mL-1" th:src="@{'/uploads/'+ ${usuario.foto}}"
+							th:alt="${usuario.foto}" style="max-width: 90%; max-height:100% ;"/>
+							
+						</div>
+						
+						<div class="col-md-5 mt-3">
+							
+							<h3 th:text="${usuario.nombre}"></h3>
+							<h7 th:text="${usuario.apellido}"></h7>
+							<h7 th:text="${usuario.lat}"></h7>
+							<h7 th:text="${usuario.lng}"></h7>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+			
+			
+		</div>
+		
+		
+	</div>
+		
+		
+		
+	</body>
+	
+	
+</html>

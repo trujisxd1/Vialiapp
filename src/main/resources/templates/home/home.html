@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="partes/head.html"></head>
+<body>
+    
+
+<!-- Inicio -->
+
+<div>
+	
+	<li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link"
+			href="javascript:void(0);" onclick="document.logout_form.submit();">Logout</a>
+		</li>
+	</ul>
+<div sec:authorize="isAuthenticated()">
+	
+	
+	<form name="logout_form" th:action="@{/logout}" method="post">
+		
+	</form>
+</div>
+      <!-- Final -->
+
+
+</body>
+</html>

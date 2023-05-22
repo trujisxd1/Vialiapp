@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script async
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKFB_ibpL59QypNtUVkZjJJxRTpzAe6JE&callback=initMap">
+
+
+		</script>
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKFB_ibpL59QypNtUVkZjJJxRTpzAe6JE&libraries=initAutocomplete"></script>
+	<script>
+		function initAutocomplete() {
+			var autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
+		}
+	</script>
+
+	<script type="text/javascript">
+		var map;
+		var marker;
+
+		// Función que inicializa el mapa
+		function initMap() {
+			var latLng = {lat: 19.4038383, lng: -98.9882725};
+
+			// Crea un mapa centrado en las coordenadas iniciales
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: latLng,
+				zoom: 50
+			});
+
+			// Crea un marcador inicial en las coordenadas iniciales
+			marker = new google.maps.Marker({
+				position: latLng,
+				map: map,
+				draggable: true
+			});
+
+			// Agrega un listener al evento 'dragend' del marcador
+			marker.addListener('dragend', function (event) {
+				// Actualiza las coordenadas del formulario con las coordenadas del marcador
+				$('#lat').val(event.latLng.lat());
+				$('#lng').val(event.latLng.lng());
+			});
+		}
+
+		$(document).ready(function () {
+			// Llama a la función initMap() cuando el documento está cargado
+			initMap();
+
+			// Agrega un listener al evento 'click' del mapa
+			google.maps.event.addListener(map, 'click', function (event) {
+				// Actualiza la posición del marcador con las coordenadas del click
+				marker.setPosition(event.latLng);
+
+				// Actualiza las coordenadas del formulario con las coordenadas del marcador
+				$('#lat').val(event.latLng.lat());
+				$('#lng').val(event.latLng.lng());
+			});
+		});
+	</script>
+</head>
+
+<header></header>
+
+
+<body>
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="card mt-5">
+				<div class="card-header text-center">
+					<h4>Reportes </h4>
+				</div>
+				<div class="card-body">
+					<form th:action="@{/form}" th:object="${usuarios}" method="POST" enctype="multipart/form-data">
+
+
+						<div class="form-group">
+
+
+
+
+							<label>Departamento</label>
+							<select th:field="*{nombre}" id="nombre" class="form-control">
+
+								<option th:each="pais:${paises}" th:value="${pais.nombre}" th:text="${pais.nombre}">
+								</option>
+
+							</select>
+
+						</div>
+
+
+
+						<div class="form-group">
+							<label>Nombre completo</label>
+							<input type="text" th:field="*{apellido}" class="form-control" />
+						</div>
+						<div class="form-group">
+							<label>Email</label>
+							<input type="text" th:field="*{email}" class="form-control" />
+						</div>
+						<div id="map" style="height: 400px;"></div>
+						<div>
+							<input type="hidden" th:field="*{lat}" id="lat" />
+							<input type="hidden" th:field="*{lng}" id="lng" />
+						</div>
+
+						<div class="row form-group">
+							<label>Seleccione una imagen:</label>
+							<input type="file" name="file" class="m-2" />
+						</div>
+						<button type="submit" class="btn btn-success">Guardar</button>
+					</form>
+					<div class="row justify-content-center">
+						<div class="col-md-4 mt-5">
+							<div class="alert alert-success" th:if="${success}" th:text="${success}"></div>
+<div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div><a th:href="@{/listar1}">aprieta</a> </div>
+</body>
+
+
+</html>

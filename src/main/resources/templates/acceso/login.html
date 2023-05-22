@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:include="partes/head.html"></head>
+<body>
+    
+
+<!-- Inicio -->
+
+    <div class="box-log">
+
+        <di class="row unu" style="margin: 0px">
+          <div class="col s12 m12 l6 fleex">
+            <div class="center container">
+				<div class="log-ocu">
+					<img class="circle" th:src="@{/img/logo.png}" alt="Logo" style="max-width:40%; max-height:40%;"/>
+				</div>
+                <form name="form"  method="POST" th:action="@{/acceso/login}">
+                    <h4>Iniciar Sesión</h4>
+                    <br>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text" class="form-control" name="username" id="username" placeholder="E-Mail" required="true" autofocus="true" />
+                                <label for="username">Ingresa tu Correo</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <label for="password" class="form-label">Contraseña</label>
+				<input type="password" class="form-control" name="password" id="password" placeholder="Contraseña" required="true" />
+                            </div>
+                        </div>
+
+                        <br>
+                        <a href="javascript:void(0);" onclick="document.form.submit();" class="waves-effect waves-light btn-small deg-nar col s12 m12 l12">Ingresar</a>
+                        
+                        <br><br>
+                    </form>
+                        <button class="waves-effect waves-light red btn-small col s12 m12 l12">Ingresa con Google</button>
+                        <br><br>
+                        <button class="waves-effect waves-light blue btn-small col s12 m12 l12">Ingresa con Facebook</button>
+                        <br><br>
+                        <p>¿Aún no estas registrada/o? <a href="">da clic aquí uwu</a></p>
+                    
+            </div>
+          </div>
+
+
+          <div class="col m6 l6 fleex deg-nar vanish" style="border-radius:0px 10px 10px 0px;">
+            <img class="circle" th:src="@{/img/logo.png}" alt="Logo" style="max-width:40%; max-height:40%;"/>
+          </div>
+
+        </div>
+
+    </div>
+      <!-- Final -->
+
+
+</body>
+</html>

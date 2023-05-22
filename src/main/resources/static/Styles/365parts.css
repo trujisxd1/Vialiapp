@@ -1,0 +1,92 @@
+/* Degradados */
+
+.deg-nar{
+    background: #fdc830; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #fdc830, #f37335); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #fdc830, #f37335); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color:#ffffff;
+}
+
+.castoro{
+    font-family: 'Castoro', serif;
+}
+.lobster-two{
+    font-family: 'Lobster Two', cursive;
+}
+.pacifico{
+    font-family: 'Pacifico', cursive;
+}
+.satisfy{
+    font-family: 'Satisfy', cursive;
+}
+.dancing{
+    font-family: 'Dancing Script', cursive;
+}
+/* Colores Solidos */
+
+.blanco{
+    background: #ffffff;
+    color: black;
+}
+
+.box-log{
+    display: flex;
+    margin: 7.5vh auto;
+    width: 70%;
+    min-height: 85vh;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+    0 10px 10px rgba(0,0,0,0.22);
+}
+
+.box-log-form{
+    display: flex;
+    margin: 5vh auto;
+    width: 60%;
+    min-height: 85vh;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+    0 10px 10px rgba(0,0,0,0.22);
+}
+
+.box-log-cat{
+    display: flex;
+    margin: 15vh auto;
+    width: 70%;
+    min-height: 60vh;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+    0 10px 10px rgba(0,0,0,0.22);
+}
+
+.fleex{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    height: 100%;
+}
+.log-ocu{
+	display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .vanish {
+      display: none;
+    }
+    .box-log{
+		width: 90%;
+		min-height: 50vh;
+		margin: 10vh auto;
+	}
+	.unu{
+		min-width: 100%;
+	}
+	.log-ocu{
+		display: flex;
+		align-items: center; 
+    	justify-content: center;
+	}
+  }
+
+  
+  @import url('https://fonts.googleapis.com/css2?family=Castoro&family=Dancing+Script&family=Lobster+Two&family=Pacifico&family=Satisfy&display=swap');

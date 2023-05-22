@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:include="partes/headApp.html"></head>
+<body>
+
+<!-- Inicio del menu lateral -->
+
+<ul id="slide-out" class="sidenav">
+  <li><div class="user-view">
+    <div class="background">
+      <img th:src="@{/img/estado.jpg}" style="max-width:100%; max-heigth:100%;">
+    </div>
+    <!-- Aquí es donde va la información del usuario como su foto, nombre y rol-->
+    <a href="#user"><img class="circle" th:src="@{/img/logo.png}"></a>
+<div sec:authorize="isAuthenticated()"><span class="white-text name" sec:authentication="name"></span></div>
+    
+   <div sec:authorize="isAuthenticated()"><span class="white-text name" sec:authentication="principal.authorities"></span></div>
+  </div></li>
+  <li><a th:href="@{/}"><i class="material-icons">whatshot</i>Ultimos reportes</a></li>
+  <li><a th:href="@{acceso/registro}"><i class="material-icons">person_add</i>Añadir Usuario</a></li>
+  <li><a href="catalogos"><i class="material-icons">create</i>Administrar Catalogos</a></li>
+  <li><a th:href="@{/form}"><i class="material-icons">add</i>Realizar un Reporte</a></li>
+  <li></li>
+  <li><div class="divider"></div></li>
+  <li><a class="subheader center">VialidAPP MX</a></li>
+  
+  <li sec:authorize="isAuthenticated()"><a class="waves-effect" href="javascript:void(0);"  onclick="document.logout_form.submit();" ><i class="material-icons">exit_to_app</i>Cerrar Sesión</a></li>
+  <div sec:authorize="isAuthenticated()">
+	
+	
+	<form name="logout_form" th:action="@{/logout}" method="post">
+		
+	</form>
+</div>
+  <li><a class="waves-effect" href="#!"><i class="material-icons">help</i>Ayuda</a></li>
+</ul>
+
+<!-- Fin del menu lateral -->
+
+<nav>
+    <div class="nav-wrapper cyan darken-4">
+    <!--<a href="#" data-target="slide-out" class="brand-logo" style="left: 10px"><i class="material-icons">dehaze</i></a>-->
+    <a href="#" class="brand-logo center pacifico">VialidAPP MX</a>
+    </div>
+</nav>
+
+<!-- Boton de despliegue del menu lateral -->
+<a href="#" data-target="slide-out" class="sidenav-trigger"><button class="btn-large waves-effect waves-light green accent-2" style="top: 0px; left:0px; position: fixed; height:100vh; border-radius: 0px, 15px, 15px, 0px;"><i class="material-icons">arrow_forward</i></button></a>
+      
+
+<!--                        Aqui empieza el cuerpo de la pagina donde va a estar la tabla con los ultimos incidentes                -->
+
+    <section class="container" style="display:flex; flex-direction: column; min-height: 95vh; background: #FFF;">
+
+          <div class="center"><h5>Ultimos Reportes</h5></div>
+
+          <div class="divider"></div>
+
+            <table class="centered responsive-table highlight">
+                <thead>
+                <tr>
+					<th>Folio</th>
+                    <th>Tipo</th>
+                    <th>Usuario que Reporto</th>
+                    <th>Cordenadas longitud</th>
+                    <th>Cordenadas lactitud</th>
+                    <th>Estatus</th>
+                    <th>Mas Detalles</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="usuario : ${usuarios}">
+					<td th:text="${usuario.id}"></td>
+                    <td th:text="${usuario.nombre}"></td>
+                    <td th:text="${usuario.apellido}"></td>
+                    <td th:text="${usuario.lat}" ></td>
+                    <td th:text="${usuario.lng}" ></td>
+                    <td><img class="float-left mL-1" th:src="@{'/uploads/' + ${usuario.foto}}" th:alt="${usuario.foto}" style="max-width:40%; max-height:40%;"/></td>
+
+                    <td><a class="waves-effect waves-light btn modal-trigger" href="#modal1"><i class="material-icons">info_outline</i></a></li></td>
+
+                    <!-- Esta es la pantalla modal donde se visualizara los detalles de cada reporte. -->
+                    
+                    <div id="modal1" class="modal modalVapp">
+                        <div class="modal-content">
+                        <div class="row">
+                          <div class="col s12 center"><h4>Infromación del Reporte</h4></div>
+                          
+						  <div class="row">
+						    <div class="col s12">
+						      <div class="card cyan darken-4">
+						        <div class="card-content white-text">
+						          <span class="card-title">Folio</span>
+						          <p>000000ASD10001</p>
+						          <br>
+						          <span class="card-title">Tipo de Reporte</span>
+						          <p>Bache</p>
+						          <br>
+						          <span class="card-title">Fecha</span>
+						          <p>10 de Mayo del 2022</p>
+						          <br>
+						          <span class="card-title">Descripción</span>
+						          <p>Aquí va la descripción del imperfecto en la vialidad</p>
+						        </div>
+						      </div>
+						    </div>
+						  </div>
+						  
+						  <div class="row">
+						    <div class="col s12">
+						      <div class="card cyan darken-4">
+						        <div class="card-content white-text">
+						          <span class="card-title">Ubicación</span>
+						           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1881.5816386532792!2d-98.98994854355804!3d19.405350025287266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1e31787c44e49%3A0x49a220a001925c34!2sC.%20Ma%C3%B1anitas%2C%20Rey%20Neza%2C%2057000%20Nezahualc%C3%B3yotl%2C%20M%C3%A9x.!5e0!3m2!1ses-419!2smx!4v1681851403809!5m2!1ses-419!2smx" style="border:0; width:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+						        </div>
+						      </div>
+						    </div>
+						  </div>
+						  
+						  <div class="row">
+						    <div class="col s12">
+						      <div class="card cyan darken-4">
+						        <div class="card-content white-text">
+									<span class="card-title">Archivos Adjuntos</span>
+									<div class="row">
+										<div class="col s12 m4 sepUp">
+									      <img class="materialboxed responsive-img" th:src="@{/img/estado.jpg}">
+									    </div>
+									    <div class="col s12 m4 sepUp">
+									      <img class="materialboxed responsive-img" th:src="@{/img/roles.jpg}">
+									    </div>
+									    <div class="col s12 m4 sepUp">
+									      <img class="materialboxed responsive-img" th:src="@{/img/Servicios.jpg}">
+									    </div>
+									    <div class="col s12 m4 sepUp">
+									      <img class="materialboxed responsive-img" th:src="@{/img/reparacion.jpg}">
+									    </div>	
+									</div>
+						        </div>
+						      </div>
+						    </div>
+						  </div>
+
+                          <div class="row ">
+						    <div class="col s12">
+						      <div class="card pink darken-4 rad-15 z-depth-4">
+						        <div class="card-content white-text">
+						          <p class="center">Estatus: Sin revisar.</p>
+						        </div>
+						      </div>
+						    </div>
+						  </div>
+
+                            <button class="col s12 m6 btn-large teal darken-4 rad-40cien">Informar</button>
+                            <div class="col s0 m1" style="margin: 10px,0,10px,0; height: 20px;"></div><!-- Estos son divisores, son invisibles-->
+                            <button class="col s12 m2 btn-large  deep-orange darken-4 rad-40cien">Eliminar</button>
+                            <div class="col s0 m1" style="margin: 10px,0,10px,0; height: 20px;"></div>
+                            <button class="col s12 m2 btn-large lime darken-2 rad-40cien">Reportar</button>
+                              
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat negrita">Cerrar</a>
+                        </div>
+                    </div>
+					
+					<!-- Aquí termina la pantalla modal -->
+					
+                </tr>
+
+                
+                </tbody>
+            </table>
+
+          <footer style="margin-top: auto;">
+            <div class="footer-copyright">
+            <div class="container center">
+            © 2023 Copyright Teotl Software
+            </div>
+          </div>
+          </footer>
+    
+    </section>  
+
+</body>
+</html>
